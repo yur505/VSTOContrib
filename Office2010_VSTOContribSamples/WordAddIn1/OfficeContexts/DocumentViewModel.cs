@@ -3,6 +3,7 @@ using Microsoft.Office.Core;
 using Microsoft.Office.Tools.Word;
 using VSTOContrib.Core;
 using VSTOContrib.Core.Extensions;
+using VSTOContrib.Core.RibbonFactory;
 using VSTOContrib.Core.RibbonFactory.Interfaces;
 using VSTOContrib.Core.RibbonFactory.Internal;
 using VSTOContrib.Core.Wpf;
@@ -31,6 +32,8 @@ namespace WikipediaWordAddin.Core.OfficeContexts
         public IRibbonUI RibbonUi { get; set; }
 
         public Factory VstoFactory { get; set; }
+
+        public object CurrentView { get; set; }
 
         public void Initialised(object context)
         {

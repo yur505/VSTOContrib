@@ -12,7 +12,7 @@ namespace PowerPointAddIn1
     {
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
-            VSTOContrib.Core.RibbonFactory.RibbonFactory.Current.SetApplication(Application, this);
+            //VSTOContrib.Core.RibbonFactory.RibbonFactory.Current.SetApplication(Application, this);
         }
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
@@ -27,7 +27,8 @@ namespace PowerPointAddIn1
                 new System.Windows.Application { ShutdownMode = System.Windows.ShutdownMode.OnExplicitShutdown };
 
             var assemblyContainingViewModels = typeof(ThisAddIn).Assembly; // This should be the assembly containing all your VSTOContrib viewmodels
-            return new VSTOContrib.PowerPoint.RibbonFactory.PowerPointRibbonFactory(new VSTOContrib.Core.DefaultViewModelFactory(), () => CustomTaskPanes, Globals.Factory, assemblyContainingViewModels);
+            //return new VSTOContrib.PowerPoint.RibbonFactory.PowerPointRibbonFactory(new VSTOContrib.Core.DefaultViewModelFactory(), () => CustomTaskPanes, Globals.Factory, assemblyContainingViewModels);
+            return null;
         }
 
         #region VSTO generated code

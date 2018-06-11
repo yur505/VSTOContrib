@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using VSTOContrib.Core;
+using VSTOContrib.Core.RibbonFactory;
 using VSTOContrib.Core.RibbonFactory.Interfaces;
 using VSTOContrib.Core.RibbonFactory.Internal;
 using VSTOContrib.Core.Extensions;
@@ -33,6 +34,8 @@ namespace ExcelAddIn1
         }
 
         public Bitmap ShowPanelImage { get { return Resources.icon; } }
+
+        public object CurrentView { get; set; }
 
         public bool RibbonVisible
         {

@@ -19,6 +19,8 @@ namespace AddTextAddin.Core
 
         public Factory VstoFactory { get; set; }
 
+        public object CurrentView { get; set; }
+
         public void Initialised(object context)
         {
             presentation = (PowerPoint.Presentation) context;
