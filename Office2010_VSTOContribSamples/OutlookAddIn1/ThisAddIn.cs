@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -57,6 +58,37 @@ namespace OutlookAddIn1
             }
         }
 
+        MailItem _mailItem = null;
+
+        private void ThisApplication_ItemRead()
+        {
+            if (_mailItem.Subject.Contains("abcd") == true)
+            {
+                MessageBox.Show("Item Read：" + _mailItem.Subject);
+            }
+            ThisApplication_OperateDataByEmail(_mailItem);
+        }
+
+        private void ThisApplication_ItemLoad(object Item)
+        {
+            if (Item is MailItem)
+            {
+                try
+                {
+                    MailItem mailItem = Item as MailItem;
+                    mailItem.Read += new
+                       ItemEvents_10_ReadEventHandler(ThisApplication_ItemRead);
+                    _mailItem = mailItem;
+                }
+                catch (System.Exception ex)
+                {
+                    MessageBox.Show(ex.ToString(),
+                      "Exception",
+                      MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+        
         private void ThisApplication_NewMail(string EntryIDCollection)
         {
             Outlook.ApplicationClass outLookApp = new Outlook.ApplicationClass();
@@ -65,40 +97,39 @@ namespace OutlookAddIn1
             string storeID = outLookFolder.StoreID;
             MailItem newEmail = (MailItem)outLookNS.GetItemFromID(EntryIDCollection, storeID);
 
-            //保存附件
+            ThisApplication_OperateDataByEmail(newEmail);
+        }
+
+        private void ThisApplication_OperateDataByEmail(MailItem newEmail)
+        {
             if (newEmail != null)
             {
-                Regex rx = new Regex("abcd");
-                if (rx.IsMatch(newEmail.Subject))
-                    MessageBox.Show("有新邮件到达：" + newEmail.Subject);
-
-                string basepath = @"D:\Working\VSTOContrib\Office2010_VSTOContribSamples\OutlookAddIn1\EmailAttachments\company\";
+                string basepath = @"D:\Working\VSTOContrib\Office2010_VSTOContribSamples\OutlookAddIn1\bin\EmailAttachments\company\";
                 string ship_name = null;
                 string report_type = null;
 
-                if (newEmail.Attachments.Count > 0)
+                for (int i = 1; i <= newEmail.Attachments.Count; i++)
                 {
-                    for (int i = 1; i <= newEmail.Attachments.Count; i++)
-                    {
-                        ship_name = newEmail.Attachments[i].FileName.Substring(0, 3);
-                        report_type = newEmail.Attachments[i].FileName.Substring(3, 6);
+                    ship_name = newEmail.Attachments[i].FileName.Substring(0, 3);
+                    report_type = newEmail.Attachments[i].FileName.Substring(3, 6);
 
-                        //filename: c:\import\asp\Voyrpt\aspvoyrpt201806.mdb
+                    //保存mdb附件
+                    //filename: c:\import\asp\Voyrpt\aspvoyrpt201806.mdb
+                    if (!Directory.Exists(basepath + ship_name + "\\" + report_type))
+                    {
+                        Directory.CreateDirectory(basepath + ship_name + "\\" + report_type);
+                    }
+                    if (!File.Exists(basepath + ship_name + "\\" + report_type + "\\" + newEmail.Attachments[i].FileName))
+                    {
                         newEmail.Attachments[i].SaveAsFile
                             (basepath + ship_name + "\\" + report_type + "\\" + newEmail.Attachments[i].FileName);
-
-                        ThisApplication_WriteToDB(newEmail.SenderName, newEmail.ReceivedTime.ToString(),
-                            basepath + ship_name + "\\" + report_type + "\\" + newEmail.Attachments[i].FileName);
                     }
+                        
+                    //解析mdb文件，写数据库
+                    ThisApplication_WriteToDB(newEmail.SenderName, newEmail.ReceivedTime.ToString(),
+                        basepath + ship_name + "\\" + report_type + "\\" + newEmail.Attachments[i].FileName);
                 }
-
-                newEmail.Attachments[0].SaveAsFile(basepath + "asp\\" + "smsrpt\\" + newEmail.Attachments[0].FileName);
-
             }
-
-            //
-
-            //解析mdb文件，写数据库
 
         }
 
@@ -240,6 +271,7 @@ namespace OutlookAddIn1
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
             this.Application.NewMailEx += new ApplicationEvents_11_NewMailExEventHandler(ThisApplication_NewMail);
+            this.Application.ItemLoad += new ApplicationEvents_11_ItemLoadEventHandler(ThisApplication_ItemLoad);
             MessageBox.Show("开始监听Outlook邮件！");
         }
 
