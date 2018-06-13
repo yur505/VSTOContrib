@@ -26,11 +26,22 @@ namespace OutlookAddIn1.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("server=localhost;user id=root;password=woaini;persistsecurityinfo=True;database=w" +
-            "orld")]
+        [global::System.Configuration.DefaultSettingValueAttribute("server=localhost;user id=root;password=woaini;persistsecurityinfo=True;database=s" +
+            "hipims")]
         public string worldConnectionString {
             get {
                 return ((string)(this["worldConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=YUR\\SQLEXPRESS;Initial Catalog=shipims;Persist Security Info=True;Use" +
+            "r ID=sa;Password=woaini")]
+        public string shipimsConnectionString {
+            get {
+                return ((string)(this["shipimsConnectionString"]));
             }
         }
     }

@@ -5,10 +5,18 @@
     <Setting Name="worldConnectionString" Type="(Connection string)" Scope="Application">
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;ConnectionString&gt;server=localhost;user id=root;password=woaini;persistsecurityinfo=True;database=world&lt;/ConnectionString&gt;
+  &lt;ConnectionString&gt;server=localhost;user id=root;password=woaini;persistsecurityinfo=True;database=shipims&lt;/ConnectionString&gt;
   &lt;ProviderName&gt;MySql.Data.MySqlClient&lt;/ProviderName&gt;
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">server=localhost;user id=root;password=woaini;persistsecurityinfo=True;database=world</Value>
+      <Value Profile="(Default)">server=localhost;user id=root;password=woaini;persistsecurityinfo=True;database=shipims</Value>
+    </Setting>
+    <Setting Name="shipimsConnectionString" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;Data Source=YUR\SQLEXPRESS;Initial Catalog=shipims;Persist Security Info=True;User ID=sa;Password=woaini&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=YUR\SQLEXPRESS;Initial Catalog=shipims;Persist Security Info=True;User ID=sa;Password=woaini</Value>
     </Setting>
   </Settings>
 </SettingsFile>

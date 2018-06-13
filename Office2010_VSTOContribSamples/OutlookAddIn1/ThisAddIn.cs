@@ -12,6 +12,8 @@ using Microsoft.Office.Core;
 using Outlook = Microsoft.Office.Interop.Outlook;
 using Office = Microsoft.Office.Core;
 
+using System.Data.SqlClient;
+
 using System.Data;
 using OutlookAddIn1.Properties;
 using MySql.Data.MySqlClient;
@@ -124,16 +126,54 @@ namespace OutlookAddIn1
                         newEmail.Attachments[i].SaveAsFile
                             (basepath + ship_name + "\\" + report_type + "\\" + newEmail.Attachments[i].FileName);
                     }
-                        
+
                     //解析mdb文件，写数据库
-                    ThisApplication_WriteToDB(newEmail.SenderName, newEmail.ReceivedTime.ToString(),
+                    ThisApplication_WriteToSqlServer(newEmail.SenderName, newEmail.ReceivedTime.ToString(),
                         basepath + ship_name + "\\" + report_type + "\\" + newEmail.Attachments[i].FileName);
+                    //ThisApplication_WriteToMySql(newEmail.SenderName, newEmail.ReceivedTime.ToString(),
+                    //    basepath + ship_name + "\\" + report_type + "\\" + newEmail.Attachments[i].FileName);
                 }
             }
 
         }
 
-        public void ThisApplication_WriteToDB(string sender, string rTime, string path)
+        public void ThisApplication_WriteToSqlServer(string sender, string rTime, string path)
+        {
+            //先打开两个类库文件
+            SqlConnection con = new SqlConnection();
+            
+            try
+            {
+                con.ConnectionString = Settings.Default.shipimsConnectionString;
+                con.Open();
+                /*
+                SqlDataAdapter 对象。 用于填充DataSet （数据集）。
+                SqlDataReader 对象。 从数据库中读取流..
+                后面要做增删改查还需要用到 DataSet 对象。
+                */
+                SqlCommand com = new SqlCommand();
+                com.Connection = con;
+                com.CommandType = CommandType.Text;
+                com.CommandText = "select * from ship_base_info";
+                SqlDataReader dr = com.ExecuteReader();//执行SQL语句
+                                                       // Call Read before accessing data.
+                while (dr.Read())
+                {
+                    MessageBox.Show(String.Format("{0}, {1}, {2}",
+                        dr[0], dr[1], dr[2]));
+                }
+
+                dr.Close();//关闭执行
+                con.Close();//关闭数据库
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Error " + ex.Number + " has occurred: " + ex.Message,
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void ThisApplication_WriteToMySql(string sender, string rTime, string path)
         {
             MySqlConnection conn = new MySqlConnection((new Settings()).worldConnectionString);
             MySqlCommand cmd = new MySqlCommand();

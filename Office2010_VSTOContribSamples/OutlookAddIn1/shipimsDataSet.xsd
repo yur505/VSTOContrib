@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="shipimsDataSet" targetNamespace="http://tempuri.org/shipimsDataSet.xsd" xmlns:mstns="http://tempuri.org/shipimsDataSet.xsd" xmlns="http://tempuri.org/shipimsDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="worldConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="worldConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.OutlookAddIn1.Properties.Settings.GlobalReference.Default.worldConnectionString" Provider="MySql.Data.MySqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ship_base_infoTableAdapter" GeneratorDataComponentClassName="ship_base_infoTableAdapter" Name="ship_base_info" UserDataComponentName="ship_base_infoTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="worldConnectionString (Settings)" DbObjectName="shipims.ship_base_info" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT ship_id, ship_name, ship_service_time FROM ship_base_info</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="smsTableAdapter" GeneratorDataComponentClassName="smsTableAdapter" Name="sms" UserDataComponentName="smsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="worldConnectionString (Settings)" DbObjectName="shipims.sms" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT ship_id, x1, x2, x3, x4 FROM sms</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="shipimsDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="shipimsDataSet" msprop:Generator_UserDSName="shipimsDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="ship_base_info" msprop:Generator_TableClassName="ship_base_infoDataTable" msprop:Generator_TableVarName="tableship_base_info" msprop:Generator_TablePropName="ship_base_info" msprop:Generator_RowDeletingName="ship_base_infoRowDeleting" msprop:Generator_RowChangingName="ship_base_infoRowChanging" msprop:Generator_RowEvHandlerName="ship_base_infoRowChangeEventHandler" msprop:Generator_RowDeletedName="ship_base_infoRowDeleted" msprop:Generator_UserTableName="ship_base_info" msprop:Generator_RowChangedName="ship_base_infoRowChanged" msprop:Generator_RowEvArgName="ship_base_infoRowChangeEvent" msprop:Generator_RowClassName="ship_base_infoRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="sms" msprop:Generator_TableClassName="smsDataTable" msprop:Generator_TableVarName="tablesms" msprop:Generator_TablePropName="sms" msprop:Generator_RowDeletingName="smsRowDeleting" msprop:Generator_RowChangingName="smsRowChanging" msprop:Generator_RowEvHandlerName="smsRowChangeEventHandler" msprop:Generator_RowDeletedName="smsRowDeleted" msprop:Generator_UserTableName="sms" msprop:Generator_RowChangedName="smsRowChanged" msprop:Generator_RowEvArgName="smsRowChangeEvent" msprop:Generator_RowClassName="smsRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
